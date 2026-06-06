@@ -10,7 +10,7 @@ const CONFIG_EVENTO = {
     data: new Date(new Date().getTime() + (180 * 24 * 60 * 60 * 1000)).getTime(),
     localizacao: 'https://maps.app.goo.gl/u46F6BX55dYucyVS9',
     whatsappNumber: '5561998349595',
-    whatsappMessage: 'Presença confirmada com sucesso! ✅ Além de comparecer, ainda vou levar minha a própria bebida porque tenho acesso à água potável… e faço parte da evolução da espécie 👏🍻”'
+    whatsappMessage: 'Presença confirmada com sucesso! ✅ Além de comparecer, ainda vou levar minha própria bebida porque tenho acesso à água potável… e faço parte da evolução da espécie 👏🍻”'
 };
 
 console.log('╔════════════════════════════════════════╗');
