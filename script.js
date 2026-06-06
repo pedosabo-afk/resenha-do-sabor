@@ -2,10 +2,10 @@
  * Script para gerenciar o convite online - Resenha do Sabor
  */
 
-// Configurações do evento
+// Configurações do evento - Data ajustada para teste
 const CONFIG_EVENTO = {
     nome: 'Resenha do Sabor',
-    data: new Date('2026-06-20T19:00:00').getTime(),
+    data: new Date('2026-12-25T19:00:00').getTime(), // Testando com data futura
     localizacao: 'https://maps.app.goo.gl/u46F6BX55dYucyVS9',
     whatsappNumber: '5585987654321', // Substitua pelo número correto com código do país
     whatsappMessage: 'Sabor, minha presença está confirmada para a Resenha do Sabor! 🎉'
@@ -78,6 +78,10 @@ function atualizarContagem() {
     const agora = new Date().getTime();
     const diferenca = CONFIG_EVENTO.data - agora;
     
+    console.log('Agora:', new Date(agora).toLocaleString());
+    console.log('Evento:', new Date(CONFIG_EVENTO.data).toLocaleString());
+    console.log('Diferença (ms):', diferenca);
+    
     if (diferenca <= 0) {
         // Evento já começou
         document.getElementById('dias').textContent = '00';
@@ -88,6 +92,7 @@ function atualizarContagem() {
         if (intervaloContagem) {
             clearInterval(intervaloContagem);
         }
+        console.log('Evento já começou!');
         return;
     }
     
@@ -96,6 +101,8 @@ function atualizarContagem() {
     const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
     const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+    
+    console.log(`Contagem: ${dias}d ${horas}h ${minutos}m ${segundos}s`);
     
     // Atualizar DOM com padStart para adicionar zero à esquerda
     document.getElementById('dias').textContent = String(dias).padStart(2, '0');
@@ -133,7 +140,9 @@ function reproduzirSomAbertura() {
  * Evento ao carregar a página
  */
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Página carregada. Iniciando...');
+    console.log('=== RESENHA DO SABOR - Inicializando ===');
+    console.log('Data do evento:', new Date(CONFIG_EVENTO.data).toLocaleString('pt-BR'));
+    console.log('Hora atual:', new Date().toLocaleString('pt-BR'));
     
     // Deixar tela inicial visível por padrão
     telaInicial.style.display = 'flex';
