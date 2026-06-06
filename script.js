@@ -26,12 +26,6 @@ const overlay = document.getElementById('overlay');
 const btnAbrir = document.getElementById('btnAbrir');
 const telaInicial = document.getElementById('telaInicial');
 
-// Elementos de contagem
-const diasEl = document.getElementById('dias');
-const horasEl = document.getElementById('horas');
-const minutosEl = document.getElementById('minutos');
-const segundosEl = document.getElementById('segundos');
-
 // Variáveis de estado
 let conviteAberto = false;
 let intervaloContagem = null;
