@@ -1,21 +1,36 @@
 /**
  * Script para gerenciar o convite online - Resenha do Sabor
+ * Versão: 2.0 - Com contagem corrigida
  */
 
-// Configurações do evento - Data ajustada para teste
+// Configurações do evento - Data testando com 6 meses no futuro
 const CONFIG_EVENTO = {
     nome: 'Resenha do Sabor',
-    data: new Date('2026-12-25T19:00:00').getTime(), // Testando com data futura
+    // Pegando data dinâmica: hoje + 180 dias
+    data: new Date(new Date().getTime() + (180 * 24 * 60 * 60 * 1000)).getTime(),
     localizacao: 'https://maps.app.goo.gl/u46F6BX55dYucyVS9',
-    whatsappNumber: '5585987654321', // Substitua pelo número correto com código do país
+    whatsappNumber: '5585987654321',
     whatsappMessage: 'Sabor, minha presença está confirmada para a Resenha do Sabor! 🎉'
 };
+
+console.log('╔════════════════════════════════════════╗');
+console.log('║  RESENHA DO SABOR - CONVITE ONLINE    ║');
+console.log('╚════════════════════════════════════════╝');
+console.log('📅 Data do Evento:', new Date(CONFIG_EVENTO.data).toLocaleString('pt-BR'));
+console.log('⏰ Hora Atual:', new Date().toLocaleString('pt-BR'));
+console.log('✅ Script v2.0 carregado com sucesso!');
 
 // Elementos do DOM
 const cardConvite = document.getElementById('cardConvite');
 const overlay = document.getElementById('overlay');
 const btnAbrir = document.getElementById('btnAbrir');
 const telaInicial = document.getElementById('telaInicial');
+
+// Elementos de contagem
+const diasEl = document.getElementById('dias');
+const horasEl = document.getElementById('horas');
+const minutosEl = document.getElementById('minutos');
+const segundosEl = document.getElementById('segundos');
 
 // Variáveis de estado
 let conviteAberto = false;
@@ -25,6 +40,7 @@ let intervaloContagem = null;
  * Abre o convite com animação
  */
 function abrirConvite() {
+    console.log('🎉 Abrindo convite...');
     conviteAberto = true;
     
     // Mostrar card e overlay
@@ -36,15 +52,13 @@ function abrirConvite() {
     
     // Iniciar contagem regressiva
     iniciarContagemRegressiva();
-    
-    // Reproduzir som (opcional)
-    reproduzirSomAbertura();
 }
 
 /**
  * Fecha o convite com animação
  */
 function fecharConvite() {
+    console.log('❌ Fechando convite...');
     conviteAberto = false;
     
     // Remover classes ativas
@@ -64,6 +78,8 @@ function fecharConvite() {
  * Inicia a contagem regressiva até o evento
  */
 function iniciarContagemRegressiva() {
+    console.log('⏱️  Iniciando contagem regressiva...');
+    
     // Atualizar imediatamente
     atualizarContagem();
     
@@ -78,21 +94,17 @@ function atualizarContagem() {
     const agora = new Date().getTime();
     const diferenca = CONFIG_EVENTO.data - agora;
     
-    console.log('Agora:', new Date(agora).toLocaleString());
-    console.log('Evento:', new Date(CONFIG_EVENTO.data).toLocaleString());
-    console.log('Diferença (ms):', diferenca);
-    
     if (diferenca <= 0) {
         // Evento já começou
-        document.getElementById('dias').textContent = '00';
-        document.getElementById('horas').textContent = '00';
-        document.getElementById('minutos').textContent = '00';
-        document.getElementById('segundos').textContent = '00';
+        diasEl.textContent = '00';
+        horasEl.textContent = '00';
+        minutosEl.textContent = '00';
+        segundosEl.textContent = '00';
         
         if (intervaloContagem) {
             clearInterval(intervaloContagem);
         }
-        console.log('Evento já começou!');
+        console.log('🎊 Evento começou!');
         return;
     }
     
@@ -102,13 +114,16 @@ function atualizarContagem() {
     const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
     const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
     
-    console.log(`Contagem: ${dias}d ${horas}h ${minutos}m ${segundos}s`);
+    // Atualizar DOM
+    diasEl.textContent = String(dias).padStart(2, '0');
+    horasEl.textContent = String(horas).padStart(2, '0');
+    minutosEl.textContent = String(minutos).padStart(2, '0');
+    segundosEl.textContent = String(segundos).padStart(2, '0');
     
-    // Atualizar DOM com padStart para adicionar zero à esquerda
-    document.getElementById('dias').textContent = String(dias).padStart(2, '0');
-    document.getElementById('horas').textContent = String(horas).padStart(2, '0');
-    document.getElementById('minutos').textContent = String(minutos).padStart(2, '0');
-    document.getElementById('segundos').textContent = String(segundos).padStart(2, '0');
+    // Debug a cada 10 segundos
+    if (segundos % 10 === 0 && segundos === 0) {
+        console.log(`⏳ Contagem: ${dias}d ${horas}h ${minutos}m`);
+    }
 }
 
 /**
@@ -117,83 +132,30 @@ function atualizarContagem() {
 function confirmarPresencaWhatsApp() {
     const numero = CONFIG_EVENTO.whatsappNumber;
     const mensagem = encodeURIComponent(CONFIG_EVENTO.whatsappMessage);
-    
-    // URL do WhatsApp Web
     const urlWhatsApp = `https://wa.me/${numero}?text=${mensagem}`;
     
-    // Abrir em nova aba
+    console.log('💬 Abrindo WhatsApp...');
     window.open(urlWhatsApp, '_blank');
-}
-
-/**
- * Reproduz som de abertura (opcional)
- */
-function reproduzirSomAbertura() {
-    try {
-        // Som ativado apenas se desejado
-    } catch (error) {
-        console.log('Não foi possível reproduzir som');
-    }
 }
 
 /**
  * Evento ao carregar a página
  */
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('=== RESENHA DO SABOR - Inicializando ===');
-    console.log('Data do evento:', new Date(CONFIG_EVENTO.data).toLocaleString('pt-BR'));
-    console.log('Hora atual:', new Date().toLocaleString('pt-BR'));
+    console.log('📄 Página carregada!');
     
-    // Deixar tela inicial visível por padrão
+    // Deixar tela inicial visível
     telaInicial.style.display = 'flex';
     
-    // Adicionar listener para fechar ao clicar no overlay
+    // Listeners
     overlay.addEventListener('click', fecharConvite);
     
-    // Adicionar listener para tecla ESC
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape' && conviteAberto) {
             fecharConvite();
         }
     });
-    
-    // Testar validação
-    validarConfiguracao();
 });
 
-/**
- * Salvar estado do convite antes de sair
- */
-window.addEventListener('beforeunload', function() {
-    if (conviteAberto) {
-        localStorage.setItem('conviteAberto', 'true');
-    }
-});
-
-/**
- * Validação de dados
- */
-function validarConfiguracao() {
-    const erros = [];
-    
-    if (!CONFIG_EVENTO.data || isNaN(CONFIG_EVENTO.data)) {
-        erros.push('Data do evento inválida');
-    }
-    
-    if (CONFIG_EVENTO.data <= new Date().getTime()) {
-        console.warn('⚠️ A data do evento deve ser no futuro. Data configurada:', new Date(CONFIG_EVENTO.data));
-    }
-    
-    if (erros.length > 0) {
-        console.error('❌ Erros na configuração:', erros);
-    } else {
-        console.log('✅ Configuração válida!');
-    }
-    
-    return erros.length === 0;
-}
-
-// Validar configuração ao carregar
-validarConfiguracao();
-
-console.log('Script carregado com sucesso! ✅');
+// Log final
+console.log('✨ Sistema de contagem regressiva pronto!');
