@@ -97,7 +97,7 @@ function atualizarContagem() {
     const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
     const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
     
-    // Atualizar DOM
+    // Atualizar DOM com padStart para adicionar zero à esquerda
     document.getElementById('dias').textContent = String(dias).padStart(2, '0');
     document.getElementById('horas').textContent = String(horas).padStart(2, '0');
     document.getElementById('minutos').textContent = String(minutos).padStart(2, '0');
@@ -133,6 +133,8 @@ function reproduzirSomAbertura() {
  * Evento ao carregar a página
  */
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('Página carregada. Iniciando...');
+    
     // Deixar tela inicial visível por padrão
     telaInicial.style.display = 'flex';
     
@@ -145,6 +147,9 @@ document.addEventListener('DOMContentLoaded', function() {
             fecharConvite();
         }
     });
+    
+    // Testar validação
+    validarConfiguracao();
 });
 
 /**
@@ -167,11 +172,13 @@ function validarConfiguracao() {
     }
     
     if (CONFIG_EVENTO.data <= new Date().getTime()) {
-        erros.push('A data do evento deve ser no futuro');
+        console.warn('⚠️ A data do evento deve ser no futuro. Data configurada:', new Date(CONFIG_EVENTO.data));
     }
     
     if (erros.length > 0) {
-        console.error('Erros na configuração:', erros);
+        console.error('❌ Erros na configuração:', erros);
+    } else {
+        console.log('✅ Configuração válida!');
     }
     
     return erros.length === 0;
