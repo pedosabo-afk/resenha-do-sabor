@@ -1,0 +1,550 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #ff6b6b;
+    --secondary-color: #4ecdc4;
+    --dark-bg: #0f0f0f;
+    --card-bg: #1a1a1a;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --accent-color: #ffd700;
+    --neon-pink: #ff006e;
+    --neon-cyan: #00f5ff;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, var(--dark-bg) 0%, #1a0033 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-primary);
+    overflow-x: hidden;
+}
+
+/* Tela Inicial */
+.tela-inicial {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    animation: fadeIn 0.8s ease-in;
+}
+
+.container-botao {
+    text-align: center;
+    animation: slideUp 1s ease-out;
+}
+
+.titulo-principal {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, var(--neon-pink), var(--neon-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px rgba(255, 0, 110, 0.3);
+    animation: glow 2s ease-in-out infinite;
+}
+
+.subtitulo {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-top: 1rem;
+    animation: fadeIn 1.5s ease-in;
+}
+
+/* Botão Principal */
+.botao-principal {
+    padding: 1rem 3rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, var(--neon-pink), var(--primary-color));
+    border: 2px solid var(--neon-pink);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(255, 0, 110, 0.5);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.botao-principal:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 40px rgba(255, 0, 110, 0.8);
+    background: linear-gradient(135deg, var(--neon-cyan), var(--secondary-color));
+}
+
+.botao-principal:active {
+    transform: translateY(-1px);
+}
+
+/* Card do Convite */
+.card-convite {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: linear-gradient(135deg, var(--card-bg), #2a1a3a);
+    border: 2px solid var(--neon-pink);
+    border-radius: 20px;
+    width: 90%;
+    max-width: 600px;
+    padding: 2rem;
+    box-shadow: 0 0 60px rgba(255, 0, 110, 0.4), inset 0 0 20px rgba(0, 245, 255, 0.1);
+    z-index: 1000;
+    animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    max-height: 90vh;
+    overflow-y: auto;
+    backdrop-filter: blur(10px);
+}
+
+.card-convite.ativo {
+    animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.btn-fechar {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.btn-fechar:hover {
+    background: var(--neon-pink);
+    transform: rotate(90deg);
+}
+
+/* Header do Card */
+.header-card {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid rgba(255, 0, 110, 0.3);
+}
+
+.titulo-evento {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.subtitulo-evento {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+/* Informações do Evento */
+.info-evento {
+    margin-bottom: 2rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: rgba(255, 0, 110, 0.1);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.info-item:hover {
+    background: rgba(255, 0, 110, 0.2);
+    transform: translateX(5px);
+}
+
+.icone {
+    font-size: 1.8rem;
+    margin-right: 1rem;
+    min-width: 2rem;
+    text-align: center;
+}
+
+.info-item div {
+    flex: 1;
+}
+
+.label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.3rem;
+}
+
+.valor {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--neon-cyan);
+}
+
+/* Contagem Regressiva */
+.countdown {
+    background: rgba(0, 245, 255, 0.05);
+    border: 1px solid rgba(0, 245, 255, 0.2);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.countdown h3 {
+    margin-bottom: 1rem;
+    color: var(--neon-cyan);
+}
+
+.contador {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.time-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.numero {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--neon-pink);
+    line-height: 1;
+}
+
+.unidade {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 0.3rem;
+}
+
+.separador {
+    color: var(--neon-cyan);
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 0.3rem;
+}
+
+/* Mensagem Personalizada */
+.mensagem {
+    text-align: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1));
+    border-left: 4px solid var(--neon-pink);
+    border-radius: 10px;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: var(--text-secondary);
+}
+
+/* Seção de Música/Vídeo */
+.secao-musica {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(0, 245, 255, 0.08);
+    border: 1px solid rgba(0, 245, 255, 0.3);
+    border-radius: 15px;
+    animation: slideUp 0.8s ease-out 0.3s both;
+}
+
+.titulo-musica {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--neon-cyan);
+    font-size: 1.2rem;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    background: #000;
+    box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.info-musica {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+}
+
+/* Botões de Ação */
+.botoes-acao {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.botao {
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.botao-mapa {
+    background: linear-gradient(135deg, var(--secondary-color), #00d4aa);
+    color: white;
+    box-shadow: 0 0 20px rgba(78, 205, 196, 0.4);
+}
+
+.botao-mapa:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 40px rgba(78, 205, 196, 0.8);
+}
+
+.botao-whatsapp {
+    background: linear-gradient(135deg, #25D366, #1da851);
+    color: white;
+    box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+}
+
+.botao-whatsapp:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 40px rgba(37, 211, 102, 0.8);
+}
+
+/* Footer */
+.footer-card {
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 0, 110, 0.2);
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.overlay.ativo {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes popIn {
+    from {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 0, 110, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(255, 0, 110, 0.8);
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        text-shadow: 0 0 20px rgba(255, 0, 110, 0.5);
+    }
+    50% {
+        text-shadow: 0 0 40px rgba(255, 0, 110, 0.8);
+    }
+}
+
+/* Scrollbar Personalizada */
+.card-convite::-webkit-scrollbar {
+    width: 8px;
+}
+
+.card-convite::-webkit-scrollbar-track {
+    background: rgba(255, 0, 110, 0.1);
+    border-radius: 10px;
+}
+
+.card-convite::-webkit-scrollbar-thumb {
+    background: var(--neon-pink);
+    border-radius: 10px;
+}
+
+.card-convite::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-cyan);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .titulo-principal {
+        font-size: 2rem;
+    }
+
+    .botao-principal {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+    }
+
+    .card-convite {
+        width: 95%;
+        padding: 1.5rem;
+    }
+
+    .titulo-evento {
+        font-size: 1.5rem;
+    }
+
+    .contador {
+        gap: 0.3rem;
+    }
+
+    .numero {
+        font-size: 1.5rem;
+    }
+
+    .separador {
+        font-size: 1.2rem;
+    }
+
+    .botoes-acao {
+        flex-direction: column;
+    }
+
+    .botao {
+        padding: 0.9rem 1.2rem;
+        font-size: 0.95rem;
+    }
+
+    .video-container {
+        padding-bottom: 56.25%;
+    }
+}
+
+@media (max-width: 480px) {
+    .titulo-principal {
+        font-size: 1.5rem;
+    }
+
+    .subtitulo {
+        font-size: 0.9rem;
+    }
+
+    .card-convite {
+        width: 98%;
+        padding: 1rem;
+    }
+
+    .titulo-evento {
+        font-size: 1.2rem;
+    }
+
+    .info-item {
+        padding: 0.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .icone {
+        font-size: 1.5rem;
+    }
+
+    .contador {
+        gap: 0.2rem;
+    }
+
+    .numero {
+        font-size: 1.2rem;
+    }
+
+    .separador {
+        font-size: 1rem;
+    }
+
+    .botao {
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .secao-musica {
+        padding: 1rem;
+    }
+
+    .titulo-musica {
+        font-size: 1rem;
+    }
+
+    .video-container {
+        padding-bottom: 56.25%;
+    }
+}
