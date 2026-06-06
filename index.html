@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resenha do Sabor - Convite Online</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Tela Inicial com Botão Animado -->
+    <div id="telaInicial" class="tela-inicial">
+        <div class="container-botao">
+            <h1 class="titulo-principal">🎉 Resenha do Sabor</h1>
+            <button id="btnAbrir" class="botao-principal" onclick="abrirConvite()">
+                Abrir Convite
+            </button>
+            <p class="subtitulo">Clique para ver os detalhes</p>
+        </div>
+    </div>
+
+    <!-- Card do Convite -->
+    <div id="cardConvite" class="card-convite">
+        <button class="btn-fechar" onclick="fecharConvite()">✕</button>
+        
+        <div class="header-card">
+            <h1 class="titulo-evento">🍽️ Resenha do Sabor</h1>
+            <p class="subtitulo-evento">Um encontro delicioso</p>
+        </div>
+
+        <div class="info-evento">
+            <!-- Data e Hora -->
+            <div class="info-item">
+                <span class="icone">📅</span>
+                <div>
+                    <p class="label">Data</p>
+                    <p class="valor">20 de Junho de 2026</p>
+                </div>
+            </div>
+
+            <!-- Horário -->
+            <div class="info-item">
+                <span class="icone">⏰</span>
+                <div>
+                    <p class="label">Horário</p>
+                    <p class="valor">19h00</p>
+                </div>
+            </div>
+
+            <!-- Localização -->
+            <div class="info-item">
+                <span class="icone">📍</span>
+                <div>
+                    <p class="label">Localização</p>
+                    <p class="valor">Veja no mapa</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contagem Regressiva -->
+        <div class="countdown">
+            <h3>Faltam</h3>
+            <div class="contador">
+                <div class="time-unit">
+                    <span id="dias" class="numero">00</span>
+                    <p class="unidade">Dias</p>
+                </div>
+                <span class="separador">:</span>
+                <div class="time-unit">
+                    <span id="horas" class="numero">00</span>
+                    <p class="unidade">Horas</p>
+                </div>
+                <span class="separador">:</span>
+                <div class="time-unit">
+                    <span id="minutos" class="numero">00</span>
+                    <p class="unidade">Minutos</p>
+                </div>
+                <span class="separador">:</span>
+                <div class="time-unit">
+                    <span id="segundos" class="numero">00</span>
+                    <p class="unidade">Segundos</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mensagem Personalizada -->
+        <div class="mensagem">
+            <p>"Prepare seu paladar para uma experiência gastronômica inesquecível!"</p>
+        </div>
+
+        <!-- Vídeo do YouTube -->
+        <div class="secao-musica">
+            <h3 class="titulo-musica">🎵 Atmosfera Musical</h3>
+            <div class="video-container">
+                <iframe 
+                    id="youtubePlayer"
+                    width="100%" 
+                    height="315" 
+                    src="https://www.youtube.com/embed/zm9kWwOSEMo?start=49&autoplay=0&controls=1" 
+                    title="Música da Resenha do Sabor" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <p class="info-musica">🎧 Clique para ouvir a atmosfera do evento</p>
+        </div>
+
+        <!-- Botões de Ação -->
+        <div class="botoes-acao">
+            <a href="https://maps.app.goo.gl/u46F6BX55dYucyVS9" target="_blank" class="botao botao-mapa">
+                📍 Ver no Mapa
+            </a>
+            <button class="botao botao-whatsapp" onclick="confirmarPresencaWhatsApp()">
+                💬 Confirmar Presença
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-card">
+            <p>Esperamos sua presença! 🎊</p>
+        </div>
+    </div>
+
+    <!-- Overlay para fechar convite -->
+    <div id="overlay" class="overlay" onclick="fecharConvite()"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

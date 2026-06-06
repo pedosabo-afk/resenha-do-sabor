@@ -92,8 +92,7 @@ body {
 /* Card do Convite */
 .card-convite {
     position: fixed;
-    top: 50%;
-    left: 50%;
+    top: 50%;n    left: 50%;
     transform: translate(-50%, -50%) scale(0);
     background: linear-gradient(135deg, var(--card-bg), #2a1a3a);
     border: 2px solid var(--neon-pink);
